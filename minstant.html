@@ -24,8 +24,11 @@
       </a>
     </div>
     <div class="nav navbar-nav">
-    {{> loginButtons}}
-</div>
+      <li>
+        <img src="{{avatar}}" class="avatar_img_nav">
+      </li>
+      {{> loginButtons}}
+    </div>
   </div>
 </nav>
 </template>
@@ -71,11 +74,13 @@
 	<h2>Type in the box below to send a message!</h2>
 	<div class="row">
 		<div class="col-md-12">
-			<div class="well well-lg">
-			{{#each messages}}
-			{{> chat_message}}
-			{{/each}}
-			</div>
+      <div class="well well-lg">
+  			<ul class="list-group">
+  			{{#each messages}}
+  			{{> chat_message}}
+  			{{/each}}
+        </ul>
+      </div>
 		</div>
 	</div>
     <div class="row">
@@ -90,6 +95,7 @@
 
 <!-- simple template that displays a message -->
 <template name="chat_message">
-	someone said: {{text}}
-	<br>
+	<li class="list-group-item">
+    <img src="{{user_avatar}}" class="avatar_img_thumb"><small>{{moFormat d=onDate f=formatToken}}</small>: {{text}}
+  </li>
 </template>

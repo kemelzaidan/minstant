@@ -8,3 +8,11 @@
 .avatar_img{
 	height:75px;
 }
+.avatar_img_thumb{
+	height: 35px;
+}
+.avatar_img_nav{
+	height: 40px;
+	border-radius: 100%;
+	vertical-align: middle;
+}
