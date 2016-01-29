@@ -1,8 +1,8 @@
-- **Task 1: Improve the look and feel**
+- [x] **Task 1: Improve the look and feel**
 
     Adapt the templates and helper functions so that the messaging window displays users’ avatars next to their messages. Feel free to add other enhancements!
 
-- **Task 2: Implement data writing security**
+- [x] **Task 2: Implement data writing security**
 
     Remove the insecure package from the application and implement a Meteor method to allow the insertion of chat items in the Chats collection. Test that you cannot insert items directly any more.
 
