@@ -128,10 +128,17 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
 
-  // Database publications
+  // DB publications
   Meteor.publish("userData", function() {
     return Meteor.users.find({}, {fields: {"services": 0, "emails": 0}});
   });
+
+  Meteor.publish("chats", function () {
+    return Chats.find({$or:[
+                {user1Id:this.userId},
+                {user2Id:this.userId}
+              ]});
+  })
 
   // Add avatar URL to user profile uppon user creation
   Accounts.onCreateUser(function(options, user) {
