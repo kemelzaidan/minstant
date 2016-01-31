@@ -1,6 +1,10 @@
 Chats = new Mongo.Collection("chats");
 
 if (Meteor.isClient) {
+  // subscribe to the chats collection
+  Meteor.subscribe("chats");
+  Meteor.subscribe("userData");
+
   // Ask for username on sign up
   Accounts.ui.config({
     passwordSignupFields: 'USERNAME_AND_EMAIL'
@@ -47,7 +51,7 @@ if (Meteor.isClient) {
   ///
   Template.available_user_list.helpers({
     users:function(){
-      return Meteor.users.find();
+      return Meteor.users.find({});
     }
   })
  Template.available_user.helpers({
@@ -122,13 +126,14 @@ if (Meteor.isClient) {
  })
 }
 
-
-// start up script that creates some users for testing
-// users have the username 'user1@test.com' .. 'user8@test.com'
-// and the password test123
-
 if (Meteor.isServer) {
 
+  // Database publications
+  Meteor.publish("userData", function() {
+    return Meteor.users.find({}, {fields: {"services": 0, "emails": 0}});
+  });
+
+  // Add avatar URL to user profile uppon user creation
   Accounts.onCreateUser(function(options, user) {
     console.log("Creating user "+user.username);
     user.profile = {};
@@ -136,6 +141,9 @@ if (Meteor.isServer) {
     return user;
   });
 
+  ////
+  // METHODS
+  ////
   Meteor.methods({
     createChat: function (user1, user2) {
       if (!this.userId){
@@ -155,11 +163,13 @@ if (Meteor.isServer) {
     }, //end of createChat
 
     updateMessages: function (chatId, messages) {
-      // SEE IF THERE IS SOME CHECK TO DO
       Chats.update(chatId, messages);
     }
   }), //end of updateMessages
 
+  // start up script that creates some users for testing
+  // users have the username 'user1@test.com' .. 'user8@test.com'
+  // and the password test123
   Meteor.startup(function () {
     if (!Meteor.users.findOne()){
       for (var i=1;i<9;i++){
