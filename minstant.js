@@ -34,7 +34,12 @@ if (Meteor.isClient) {
                 ]};
     var chat = Chats.findOne(filter);
     if (!chat){// no chat matching the filter - need to insert a new one
-      chatId = Meteor.call("createChat", Meteor.userId(), otherUserId);
+      chatId = Meteor.call("createChat", Meteor.userId(), otherUserId, function (error) {
+        if (error && error.error === "logged-out") {
+          // show a nice error message
+          alert("Please, log in or create an account.");
+        }
+      });
     }
     else {// there is a chat going already - use that.
       chatId = chat._id;
