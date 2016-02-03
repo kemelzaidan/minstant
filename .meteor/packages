@@ -22,4 +22,5 @@ twbs:bootstrap
 ian:accounts-ui-bootstrap-3
 jparker:gravatar
 lbee:moment-helpers
-seriousm:emoji-continued
+mquandalle:jquery-textcomplete
+emojione:emojione

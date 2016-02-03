@@ -86,7 +86,7 @@
     <div class="row">
 		<div class="col-md-12">
 			<form class="js-send-chat">
-			<input class="input" type="text" name="chat" placeholder="type a message here...">
+			<input class="input" id="text-field" type="text" name="chat" placeholder="type a message here...">
 			<button class="btn btn-default">send</button>
 		</form>
 		</div>
@@ -96,6 +96,6 @@
 <!-- simple template that displays a message -->
 <template name="chat_message">
 	<li class="list-group-item">
-    <img src="{{user_avatar}}" class="avatar_img_thumb"><small>{{moFormat d=onDate f=formatToken}}</small>: {{#emoji}}{{text}}{{/emoji}}
+    <img src="{{user_avatar}}" class="avatar_img_thumb"><small>{{moFormat d=onDate f=formatToken}}</small>: {{#emojione}}{{text}}{{/emojione}}
   </li>
 </template>
